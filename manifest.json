@@ -1,0 +1,16 @@
+
+{
+  "name": "SIGMAX Terminal",
+  "short_name": "SIGMAX",
+  "start_url": "/SIGMAX_APP_STEALTH_TERMINAL.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#00ff00",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

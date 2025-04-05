@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>🧠 SIGMAX Stealth App – Terminal Elite</title>
+  <style>
+    body { background: #000; color: #0f0; font-family: monospace; padding: 20px; }
+    button, input {
+      background: #111; color: #0f0; border: none; padding: 10px; margin: 5px; font-size: 1em;
+    }
+    #terminal, #ranking, #mapa, #vault { margin-top: 20px; display: none; }
+    .zona { cursor: pointer; border: 1px solid #0f0; padding: 10px; margin: 10px 0; background: #111; }
+    .ranking-line { margin: 5px 0; }
+  </style>
+</head>
+<body>
+
+<h2>SIGMAX STEALTH TERMINAL</h2>
+<input id="senha" placeholder="Senha de acesso" />
+<button onclick="validarSenha()">Entrar</button>
+<div id="status">[Terminal bloqueado]</div>
+
+<div id="terminal">
+  <h3>Bem-vindo, agente <span id="codinome">----</span> | XP: <span id="xp">0</span></h3>
+  <input id="codinomeInput" placeholder="Digite seu codinome" />
+  <button onclick="registrar()">Registrar</button>
+  <button onclick="mostrarMapa()">Mapa</button>
+  <button onclick="mostrarVault()">Vault</button>
+  <button onclick="mostrarRanking()">Ranking</button>
+</div>
+
+<div id="mapa">
+  <h4>Mapa de Missões</h4>
+  <div class="zona" onclick="completarZona(1)">Mainha’s Kitchen</div>
+  <div class="zona" onclick="completarZona(2)">Vault de Sharjah</div>
+  <div class="zona" onclick="completarZona(3)">Dark Web Desert</div>
+  <div class="zona" onclick="completarZona(4)">Terminal Fujairah</div>
+  <div class="zona" onclick="completarZona(5)">Laboratório MetaAI</div>
+</div>
+
+<div id="vault">
+  <h4>Vault dos 7 Sheiks</h4>
+  <div class="zona" onclick="responder(1)">SCO-A: 50k MT para Fujairah</div>
+  <div class="zona" onclick="responder(2)">SCO-B: CIF Omã cláusula oculta</div>
+  <div class="zona" onclick="responder(3)">SCO-C: 100k MT back-to-back real</div>
+</div>
+
+<div id="ranking">
+  <h4>Ranking Local</h4>
+  <div id="rankList">[Nenhum agente registrado ainda]</div>
+</div>
+
+<script>
+  let xp = 0;
+  let codinome = "";
+  const senhaCerta = "mainhaverse2024";
+
+  function validarSenha() {
+    const senha = document.getElementById("senha").value;
+    if (senha === senhaCerta) {
+      document.getElementById("terminal").style.display = "block";
+      document.getElementById("status").innerText = "[Acesso liberado]";
+    } else {
+      document.getElementById("status").innerText = "Senha incorreta. Mainha tá de olho...";
+    }
+  }
+
+  function registrar() {
+    codinome = document.getElementById("codinomeInput").value;
+    document.getElementById("codinome").innerText = codinome;
+    xp = 100;
+    document.getElementById("xp").innerText = xp;
+    salvarRanking();
+  }
+
+  function completarZona(num) {
+    xp += 50;
+    document.getElementById("xp").innerText = xp;
+    alert("Missão " + num + " concluída! +50XP");
+    salvarRanking();
+  }
+
+  function mostrarMapa() {
+    esconderTudo(); document.getElementById("mapa").style.display = "block";
+  }
+
+  function mostrarVault() {
+    esconderTudo(); document.getElementById("vault").style.display = "block";
+  }
+
+  function mostrarRanking() {
+    esconderTudo();
+    const rank = JSON.parse(localStorage.getItem("ranking") || "[]");
+    let html = rank.map(r => `<div class='ranking-line'>${r.nome}: ${r.xp} XP</div>`).join('');
+    document.getElementById("rankList").innerHTML = html || "[Sem dados]";
+    document.getElementById("ranking").style.display = "block";
+  }
+
+  function salvarRanking() {
+    let dados = JSON.parse(localStorage.getItem("ranking") || "[]");
+    dados = dados.filter(r => r.nome !== codinome);
+    dados.push({ nome: codinome, xp });
+    localStorage.setItem("ranking", JSON.stringify(dados));
+  }
+
+  function responder(escolha) {
+    if (escolha === 3) {
+      alert("SCO REAL! +150XP");
+      xp += 150;
+    } else {
+      alert("SCO FALSO! -25XP");
+      xp -= 25;
+    }
+    document.getElementById("xp").innerText = xp;
+    salvarRanking();
+  }
+
+  function esconderTudo() {
+    document.getElementById("mapa").style.display = "none";
+    document.getElementById("vault").style.display = "none";
+    document.getElementById("ranking").style.display = "none";
+  }
+</script>
+
+</body>
+</html>
