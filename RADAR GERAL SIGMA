@@ -1,0 +1,112 @@
+sigmax-stealth/
+├── index.html
+├── style.css
+├── app.js
+├── data/
+│   └── sco_dataset.json
+├── assets/
+│   ├── logo.png
+│   └── voice/
+│       └── mainha_intro.mp3
+├── README.md
+└── LICENSE
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SIGMA-X Terminal</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header>
+    <h1>SIGMA-X Terminal - xCube PRO</h1>
+  </header>
+
+  <section id="dashboard">
+    <div class="widget orange">ICE: 22.45</div>
+    <div class="widget red">Status SCO: Duplicado</div>
+    <div class="widget darkred">Risco: ALTO</div>
+    <div class="widget gray">Buyer: Não validado</div>
+    <div class="widget gray">Seller: Desconhecido</div>
+    <div class="widget purple">Interceptações: 3 ativas</div>
+    <div class="widget red">Sensibilidade: 85%</div>
+    <div class="widget green">Mainha Shield: Ativado</div>
+  </section>
+
+  <section>
+    <button onclick="playMainha()">Ouvir Mainha</button>
+    <button onclick="gerarAlerta()">Emitir Alerta SCO</button>
+  </section>
+
+  <audio id="mainhaVoice" src="assets/voice/mainha_intro.mp3"></audio>
+
+  <script src="app.js"></script>
+</body>
+</html>body {
+  background: #111;
+  color: #eee;
+  font-family: monospace;
+  text-align: center;
+  padding: 20px;
+}
+header h1 {
+  color: #0ff;
+  margin-bottom: 30px;
+}
+#dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.widget {
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  min-width: 120px;
+}
+.orange { background: #e67e22; }
+.red { background: #e74c3c; }
+.darkred { background: #c0392b; }
+.green { background: #27ae60; }
+.purple { background: #8e44ad; }
+.gray { background: #7f8c8d; }
+button {
+  margin: 10px;
+  padding: 12px;
+  font-size: 16px;
+  background: #0ff;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  border-radius: 8px;
+}function playMainha() {
+  const audio = document.getElementById('mainhaVoice');
+  audio.play();
+}
+
+function gerarAlerta() {
+  alert("⚠️ SCO marcado como duplicado e em fase crítica.\nMainha ativou rastreio.");
+}# SIGMA-X Terminal
+
+Sistema institucional de rastreio e análise tática de SCOs e falsificações no mercado de açúcar ICUMSA 45.
+
+## Módulos Ativados
+
+- Interceptação Mainha Shield
+- xCube PRO
+- Validação de SCO
+- Alerta Risco Crítico
+- Audio embutido (Mainha)
+
+## Como usar
+
+1. Abra o `index.html` em navegador seguro
+2. Clique em "Ouvir Mainha" para ativar alerta vocal
+3. Monitore os dados na tela
+git init
+git remote add origin https://github.com/brenomouras/sigmax-stealth.git
+git add .
+git commit -m "Versão SIGMA-X Terminal PRO com Shield e Mainha Ativa"
+git push -u origin master
